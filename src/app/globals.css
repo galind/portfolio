@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base colors - inspired by watch materials */
+  --background: #fafaf9;
+  --foreground: #1c1917;
+  --accent: #d4af37; /* Gold accent */
+  --muted: #78716c;
+  
+  /* Watchmaking precision colors */
+  --steel: #525252;
+  --silver: #e5e5e5;
+  --bronze: #cd7f32;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-steel: var(--steel);
+  --color-silver: var(--silver);
+  --color-bronze: var(--bronze);
+  
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0c0a09;
+    --foreground: #fafaf9;
+    --accent: #fbbf24; /* Brighter gold for dark mode */
+    --muted: #a8a29e;
+    --steel: #a3a3a3;
+    --silver: #525252;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Smooth transitions for interactive elements */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
