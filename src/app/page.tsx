@@ -19,11 +19,11 @@ export default function Home() {
             {/* Introduction */}
             <div className="space-y-6 text-base sm:text-lg font-light leading-relaxed max-w-2xl">
               <p className="text-foreground">
-                I've always been curious about how things work. As a kid, I'd take things apart just to see what was inside. That curiosity led me to software, where I could build things from the ground up and understand every piece of the puzzle.
+                I&apos;ve always been curious about how things work. As a kid, I&apos;d take things apart just to see what was inside. That curiosity led me to software, where I could build things from the ground up and understand every piece of the puzzle.
               </p>
               
               <p className="text-muted">
-                When I'm not building software, you'll find me exploring the intricate world of horology, 
+                When I&apos;m not building software, you&apos;ll find me exploring the intricate world of horology, 
                 where centuries-old mechanical engineering meets timeless design.
               </p>
             </div>
@@ -95,7 +95,7 @@ export default function Home() {
               <li className="flex gap-4">
                 <span className="text-accent mt-1">•</span>
                 <span className="text-muted">
-                  <span className="text-foreground">Rubik's cubes and puzzles.</span> Speedsolving, collecting different types, figuring out how they work.
+                  <span className="text-foreground">Rubik&apos;s cubes and puzzles.</span> Speedsolving, collecting different types, figuring out how they work.
                 </span>
               </li>
             </ul>
@@ -124,7 +124,7 @@ export default function Home() {
             
             <div className="space-y-8">
               <p className="text-base sm:text-lg font-light leading-relaxed text-muted">
-                I'm always interested in hearing about new projects and opportunities. 
+                I&apos;m always interested in hearing about new projects and opportunities. 
                 Whether you have a question or just want to say hi, feel free to get in touch.
               </p>
               
