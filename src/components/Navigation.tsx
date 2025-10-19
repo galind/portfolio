@@ -1,22 +1,46 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Navigation() {
-  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   const links = [
-    { href: "#", label: "Home" },
-    { href: "#about", label: "About" },
+    { href: "#about", label: "Interests" },
     { href: "#work", label: "Work" },
     { href: "#contact", label: "Contact" },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["home", "about", "work", "contact"];
+      const scrollPosition = window.scrollY + 100; // Offset for nav height
+
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetBottom = offsetTop + element.offsetHeight;
+
+          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+            setActiveSection(`#${sectionId}`);
+            break;
+          }
+        }
+      }
+    };
+
+    // Set initial active section
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-steel/30">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-steel/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
         <div className="flex items-center justify-between">
           {/* Logo/Brand - responsive text size */}
@@ -33,7 +57,7 @@ export default function Navigation() {
                 key={link.href}
                 href={link.href}
                 className={`text-sm font-light tracking-wider transition-colors ${
-                  pathname === link.href
+                  activeSection === link.href
                     ? "text-foreground border-b border-accent pb-1"
                     : "text-muted hover:text-foreground"
                 }`}
@@ -51,7 +75,7 @@ export default function Navigation() {
           >
             <span
               className={`h-[1px] w-5 bg-foreground transition-all ${
-                mobileMenuOpen ? "rotate-45 translate-y-2.5" : ""
+                mobileMenuOpen ? "rotate-45 translate-y-[7px]" : ""
               }`}
             ></span>
             <span
@@ -61,7 +85,7 @@ export default function Navigation() {
             ></span>
             <span
               className={`h-[1px] w-5 bg-foreground transition-all ${
-                mobileMenuOpen ? "-rotate-45 -translate-y-2.5" : ""
+                mobileMenuOpen ? "-rotate-45 -translate-y-[7px]" : ""
               }`}
             ></span>
           </button>
@@ -76,9 +100,9 @@ export default function Navigation() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`text-sm font-light tracking-wide transition-colors ${
-                    pathname === link.href
-                      ? "text-accent"
+                  className={`text-sm font-light tracking-wide transition-colors inline-block ${
+                    activeSection === link.href
+                      ? "text-foreground border-b border-accent pb-1"
                       : "text-muted hover:text-foreground"
                   }`}
                 >
