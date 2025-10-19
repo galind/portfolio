@@ -280,7 +280,7 @@ export default function Home() {
                     </a>
                     <button
                       onClick={copyEmail}
-                      className="text-xs text-muted hover:text-foreground transition-colors border border-steel/20 hover:border-accent/50 px-2 py-1"
+                      className="text-xs text-muted hover:text-foreground transition-colors border border-steel/20 hover:border-accent/50 px-2 py-1 cursor-pointer"
                       title="Copy email"
                     >
                       {copied ? '✓ Copied' : 'Copy'}
