@@ -94,13 +94,13 @@ export default function Navigation() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden pt-4 pb-2 border-t border-steel/20 mt-4">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 items-start">
               {links.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`text-sm font-light tracking-wide transition-colors inline-block ${
+                  className={`text-sm font-light tracking-wide transition-colors ${
                     activeSection === link.href
                       ? "text-foreground border-b border-accent pb-1"
                       : "text-muted hover:text-foreground"
