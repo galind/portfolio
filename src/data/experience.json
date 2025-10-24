@@ -1,0 +1,63 @@
+{
+  "entries": [
+    {
+      "id": "nomos-archives",
+      "name": "NOMOS Archives",
+      "type": "hobbies",
+      "startDate": "Apr 2025",
+      "endDate": "Present",
+      "description": "Building a platform for archiving and exploring historical content.",
+      "roles": [
+        {
+          "title": "Founder",
+          "startDate": "Apr 2025",
+          "endDate": "Present"
+        }
+      ],
+      "technologies": ["TypeScript", "Node", "Python"]
+    },
+    {
+      "id": "emburse",
+      "name": "Emburse",
+      "type": "professional",
+      "startDate": "Jul 2023",
+      "endDate": "Present",
+      "description": "Building infrastructure and automation tools for expense management and payment solutions.",
+      "roles": [
+        {
+          "title": "Software Engineer III",
+          "startDate": "Apr 2025",
+          "endDate": "Present"
+        },
+        {
+          "title": "Senior Automation Engineer",
+          "startDate": "Jul 2023",
+          "endDate": "Apr 2025"
+        }
+      ],
+      "technologies": ["Python", "TypeScript", "Bash"]
+    },
+    {
+      "id": "cookbeast",
+      "name": "CookBeast",
+      "type": "professional",
+      "startDate": "Sept 2019",
+      "endDate": "Apr 2021",
+      "description": "Wrote custom software and led expansion to Mexico, Colombia, Argentina, and Chile.",
+      "roles": [
+        {
+          "title": "Latam Co-Founder",
+          "startDate": "Dec 2019",
+          "endDate": "Apr 2021"
+        },
+        {
+          "title": "Software Developer",
+          "startDate": "Sept 2019",
+          "endDate": "Apr 2021"
+        }
+      ],
+      "technologies": []
+    }
+  ]
+}
+

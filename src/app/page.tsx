@@ -3,6 +3,7 @@
 import { GitHub, Linkedin, ArrowUp } from "react-feather";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import experienceData from "@/data/experience.json";
 
 // Dynamic import to avoid SSR issues with Leaflet
 const Map = dynamic(() => import("@/components/Map"), {
@@ -17,10 +18,13 @@ const Map = dynamic(() => import("@/components/Map"), {
   ),
 });
 
+type ExperienceFilter = 'all' | 'professional' | 'hobbies';
+
 export default function Home() {
   const [email, setEmail] = useState('');
   const [copied, setCopied] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [activeFilter, setActiveFilter] = useState<ExperienceFilter>('all');
 
   useEffect(() => {
     // Obfuscate email from scrapers
@@ -49,6 +53,13 @@ export default function Home() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Filter experience entries based on active tab
+  const filteredEntries = experienceData.entries.filter(entry => {
+    if (activeFilter === 'all') return true;
+    return entry.type === activeFilter;
+  });
+
   return (
     <>
       {/* Hero Section */}
@@ -80,10 +91,10 @@ export default function Home() {
             {/* Call-to-action */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
               <a
-                href="#work"
+                href="#experience"
                 className="group inline-flex items-center justify-center px-8 py-3 border border-accent text-accent hover:bg-accent hover:text-background transition-all font-light tracking-wider text-sm"
               >
-                View My Work
+                View My Experience
                 <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
               </a>
               
@@ -99,6 +110,110 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Experience Section - Timeline */}
+      <section id="experience" className="flex justify-center px-4 sm:px-6 lg:px-8 py-20 bg-background border-t border-steel/20">
+        <div className="max-w-5xl w-full">
+          <div className="space-y-12">
+            <div className="space-y-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight">Experience</h2>
+              
+              {/* Filter Tabs */}
+              <div className="flex gap-4 border-b border-steel/20">
+                {[
+                  { key: 'all', label: 'All' },
+                  { key: 'professional', label: 'Professional' },
+                  { key: 'hobbies', label: 'Hobbies' }
+                ].map((tab) => (
+                  <button
+                    key={tab.key}
+                    onClick={() => setActiveFilter(tab.key as ExperienceFilter)}
+                    className={`pb-3 px-1 text-sm font-light tracking-wider transition-all relative cursor-pointer ${
+                      activeFilter === tab.key
+                        ? 'text-foreground'
+                        : 'text-muted hover:text-foreground'
+                    }`}
+                  >
+                    {tab.label}
+                    {activeFilter === tab.key && (
+                      <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent"></span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Timeline */}
+            <div className="relative max-w-4xl">
+              {/* Timeline line */}
+              <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent/40 via-steel/20 to-steel/10 md:-translate-x-1/2"></div>
+
+              {/* Timeline Items */}
+              <div className="space-y-16 md:space-y-20">
+                {filteredEntries.map((entry, index) => {
+                  const isEven = index % 2 === 0;
+                  const isFirst = index === 0;
+                  
+                  return (
+                    <div 
+                      key={entry.id}
+                      className="relative grid md:grid-cols-2 gap-8 md:gap-16"
+                    >
+                      {/* Year marker */}
+                      <div className={`absolute left-0 md:left-1/2 w-4 h-4 rounded-full md:-translate-x-1/2 ${
+                        isFirst 
+                          ? 'bg-accent shadow-lg shadow-accent/20' 
+                          : 'bg-steel/40'
+                      }`}></div>
+                      
+                      {/* Content - alternates left/right on desktop */}
+                      <div className={`pl-10 ${
+                        isEven 
+                          ? 'md:text-right md:pl-0 md:pr-16' 
+                          : 'md:pl-16 md:col-start-2'
+                      }`}>
+                        <div className="space-y-4 group">
+                          <span className="inline-block text-xs uppercase tracking-widest text-accent font-light">
+                            {entry.startDate} — {entry.endDate}
+                          </span>
+                          
+                          <h3 className="text-2xl md:text-3xl font-light text-foreground">
+                            {entry.name}
+                          </h3>
+                          
+                          <p className="text-sm text-muted font-light leading-relaxed">
+                            {entry.description}
+                          </p>
+                          
+                          <div className="space-y-2 text-base font-light">
+                            {entry.roles.map((role, roleIndex) => (
+                              <div key={roleIndex}>
+                                <p className="text-foreground">{role.title}</p>
+                                <p className="text-xs text-muted">
+                                  {role.startDate} — {role.endDate}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                          
+                          {entry.technologies.length > 0 && (
+                            <p className="text-[10px] text-muted uppercase tracking-widest font-light">
+                              {entry.technologies.join(' · ')}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      
+                      {/* Empty space for alternating layout */}
+                      <div className="hidden md:block"></div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Interests Section */}
       <section id="about" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 bg-background border-t border-steel/20">
         <div className="max-w-5xl w-full">
@@ -106,152 +221,48 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight">Interests</h2>
             
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 text-base sm:text-lg font-light leading-relaxed">
-              <li className="flex gap-4 hover:translate-x-1 transition-transform">
-                <span className="text-accent mt-1">•</span>
+              <li className="flex gap-4 items-baseline">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0 -translate-y-[0.2em]"></span>
                 <span className="text-muted">
                   <span className="text-foreground">Mechanical watches.</span> Understanding how movements work, learning the stories they carry, and seeking out independent watchmakers with unique voices.
                 </span>
               </li>
               
-              <li className="flex gap-4 hover:translate-x-1 transition-transform">
-                <span className="text-accent mt-1">•</span>
+              <li className="flex gap-4 items-baseline">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0 -translate-y-[0.2em]"></span>
                 <span className="text-muted">
                   <span className="text-foreground">CAD and 3D printing.</span> Designing in Fusion 360, then making it real. Tools, parts, solutions for problems I or friends run into.
                 </span>
               </li>
               
-              <li className="flex gap-4 hover:translate-x-1 transition-transform">
-                <span className="text-accent mt-1">•</span>
+              <li className="flex gap-4 items-baseline">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0 -translate-y-[0.2em]"></span>
                 <span className="text-muted">
                   <span className="text-foreground">Reading.</span> Classic literature, mystery novels, economics and political philosophy, intelligence history, science fiction.
                 </span>
               </li>
               
-              <li className="flex gap-4 hover:translate-x-1 transition-transform">
-                <span className="text-accent mt-1">•</span>
+              <li className="flex gap-4 items-baseline">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0 -translate-y-[0.2em]"></span>
                 <span className="text-muted">
                   <span className="text-foreground">Personal finance and investing.</span> Following markets, tracking data, understanding how the world economy moves and why.
                 </span>
               </li>
               
-              <li className="flex gap-4 hover:translate-x-1 transition-transform">
-                <span className="text-accent mt-1">•</span>
+              <li className="flex gap-4 items-baseline">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0 -translate-y-[0.2em]"></span>
                 <span className="text-muted">
                   <span className="text-foreground">Hardware projects.</span> Arduino and ESP32. Motors, sensors, electronics. Building things that sometimes work.
                 </span>
               </li>
               
-              <li className="flex gap-4 hover:translate-x-1 transition-transform">
-                <span className="text-accent mt-1">•</span>
+              <li className="flex gap-4 items-baseline">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0 -translate-y-[0.2em]"></span>
                 <span className="text-muted">
                   <span className="text-foreground">Rubik&apos;s cubes and puzzles.</span> Speedsolving, collecting different types, figuring out how they work.
                 </span>
               </li>
             </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Work Section */}
-      <section id="work" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 bg-background border-t border-steel/20">
-        <div className="max-w-5xl w-full">
-          <div className="space-y-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight">Work</h2>
-            
-            <p className="text-base sm:text-lg font-light leading-relaxed text-muted max-w-2xl">
-              Selected projects and collaborations.
-            </p>
-
-            {/* Project Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Project 1 */}
-              <div className="border border-steel/20 p-6 hover:border-accent/50 transition-colors group">
-                <div className="space-y-4">
-                  <div className="flex items-start justify-between">
-                    <h3 className="text-xl font-light text-foreground group-hover:text-accent transition-colors">
-                      Project Title
-                    </h3>
-                    <span className="text-xs text-muted">2024</span>
-                  </div>
-                  
-                  <p className="text-sm text-muted font-light leading-relaxed">
-                    Brief description of the project, technologies used, and impact. Keep it concise and focused on key achievements.
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    <span className="text-xs px-2 py-1 border border-steel/30 text-muted">Technology</span>
-                    <span className="text-xs px-2 py-1 border border-steel/30 text-muted">Stack</span>
-                    <span className="text-xs px-2 py-1 border border-steel/30 text-muted">Tags</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Project 2 */}
-              <div className="border border-steel/20 p-6 hover:border-accent/50 transition-colors group">
-                <div className="space-y-4">
-                  <div className="flex items-start justify-between">
-                    <h3 className="text-xl font-light text-foreground group-hover:text-accent transition-colors">
-                      Project Title
-                    </h3>
-                    <span className="text-xs text-muted">2024</span>
-                  </div>
-                  
-                  <p className="text-sm text-muted font-light leading-relaxed">
-                    Brief description of the project, technologies used, and impact. Keep it concise and focused on key achievements.
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    <span className="text-xs px-2 py-1 border border-steel/30 text-muted">Technology</span>
-                    <span className="text-xs px-2 py-1 border border-steel/30 text-muted">Stack</span>
-                    <span className="text-xs px-2 py-1 border border-steel/30 text-muted">Tags</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Project 3 */}
-              <div className="border border-steel/20 p-6 hover:border-accent/50 transition-colors group">
-                <div className="space-y-4">
-                  <div className="flex items-start justify-between">
-                    <h3 className="text-xl font-light text-foreground group-hover:text-accent transition-colors">
-                      Project Title
-                    </h3>
-                    <span className="text-xs text-muted">2023</span>
-                  </div>
-                  
-                  <p className="text-sm text-muted font-light leading-relaxed">
-                    Brief description of the project, technologies used, and impact. Keep it concise and focused on key achievements.
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    <span className="text-xs px-2 py-1 border border-steel/30 text-muted">Technology</span>
-                    <span className="text-xs px-2 py-1 border border-steel/30 text-muted">Stack</span>
-                    <span className="text-xs px-2 py-1 border border-steel/30 text-muted">Tags</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Project 4 */}
-              <div className="border border-steel/20 p-6 hover:border-accent/50 transition-colors group">
-                <div className="space-y-4">
-                  <div className="flex items-start justify-between">
-                    <h3 className="text-xl font-light text-foreground group-hover:text-accent transition-colors">
-                      Project Title
-                    </h3>
-                    <span className="text-xs text-muted">2023</span>
-                  </div>
-                  
-                  <p className="text-sm text-muted font-light leading-relaxed">
-                    Brief description of the project, technologies used, and impact. Keep it concise and focused on key achievements.
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    <span className="text-xs px-2 py-1 border border-steel/30 text-muted">Technology</span>
-                    <span className="text-xs px-2 py-1 border border-steel/30 text-muted">Stack</span>
-                    <span className="text-xs px-2 py-1 border border-steel/30 text-muted">Tags</span>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -290,17 +301,17 @@ export default function Home() {
                   <div className="flex gap-6 text-sm">
                     <a 
                       href="https://github.com/galind" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
+          target="_blank"
+          rel="noopener noreferrer"
                       className="text-muted hover:text-foreground transition-colors flex items-center gap-2"
                     >
                       <GitHub size={16} />
                       <span>GitHub</span>
-                    </a>
-                    <a 
+        </a>
+        <a
                       href="https://linkedin.com/in/ggalindoa" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
+          target="_blank"
+          rel="noopener noreferrer"
                       className="text-muted hover:text-foreground transition-colors flex items-center gap-2"
                     >
                       <Linkedin size={16} />

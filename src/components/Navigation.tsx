@@ -8,14 +8,14 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState("");
 
   const links = [
+    { href: "#experience", label: "Experience" },
     { href: "#about", label: "Interests" },
-    { href: "#work", label: "Work" },
     { href: "#contact", label: "Contact" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "about", "work", "contact"];
+      const sections = ["home", "experience", "about", "contact"];
       const scrollPosition = window.scrollY + 100; // Offset for nav height
 
       for (const sectionId of sections) {
@@ -70,7 +70,7 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden flex flex-col gap-1.5 p-2"
+            className="md:hidden flex flex-col gap-1.5 p-2 cursor-pointer"
             aria-label="Toggle menu"
           >
             <span
