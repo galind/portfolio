@@ -1,61 +1,70 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import { useMemo } from 'react';
-import L from 'leaflet';
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import { useMemo } from "react";
+import L from "leaflet";
 
 // Fix for default marker icon in production
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
+  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
 
 interface MapProps {
-  variant?: 'default' | 'grayscale' | 'nolabels' | 'sepia' | 'dark';
+  variant?: "default" | "grayscale" | "nolabels" | "sepia" | "dark";
   label?: string;
 }
 
-export default function Map({ variant = 'dark', label }: MapProps) {
+export default function Map({ variant = "dark", label }: MapProps) {
   // Barcelona coordinates
   const position: [number, number] = [41.3874, 2.1686];
 
   // Simple dot marker
-  const customIcon = useMemo(() => new L.DivIcon({
-    className: 'custom-dot-marker',
-    html: '<div style="width: 12px; height: 12px; background-color: #d4af37; border: 2px solid #fafaf9; border-radius: 50%; box-shadow: 0 0 4px rgba(0,0,0,0.3);"></div>',
-    iconSize: [12, 12],
-    iconAnchor: [6, 6],
-  }), []);
+  const customIcon = useMemo(
+    () =>
+      new L.DivIcon({
+        className: "custom-dot-marker",
+        html: '<div style="width: 12px; height: 12px; background-color: #d4af37; border: 2px solid #fafaf9; border-radius: 50%; box-shadow: 0 0 4px rgba(0,0,0,0.3);"></div>',
+        iconSize: [12, 12],
+        iconAnchor: [6, 6],
+      }),
+    []
+  );
 
   const tileConfig = {
     default: {
-      url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      className: 'opacity-70',
+      url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      className: "opacity-70",
     },
     grayscale: {
-      url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      className: 'grayscale opacity-60',
+      url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      className: "grayscale opacity-60",
     },
     nolabels: {
-      url: 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      className: 'opacity-70',
+      url: "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png",
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      className: "opacity-70",
     },
     sepia: {
-      url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      className: 'sepia-[0.3] opacity-70',
+      url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      className: "sepia-[0.3] opacity-70",
     },
     dark: {
-      url: 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      className: 'opacity-80',
+      url: "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      className: "opacity-80",
     },
   };
 
@@ -63,15 +72,13 @@ export default function Map({ variant = 'dark', label }: MapProps) {
 
   return (
     <div className="w-full space-y-2">
-      {label && (
-        <p className="text-xs text-muted font-light">{label}</p>
-      )}
+      {label && <p className="text-xs text-muted font-light">{label}</p>}
       <div className="w-full h-[300px] rounded-sm overflow-hidden border border-steel/20 map-container">
         <MapContainer
           center={position}
           zoom={4}
           scrollWheelZoom={false}
-          style={{ height: '100%', width: '100%' }}
+          style={{ height: "100%", width: "100%" }}
           zoomControl={false}
           doubleClickZoom={false}
           dragging={false}
@@ -105,4 +112,3 @@ export default function Map({ variant = 'dark', label }: MapProps) {
     </div>
   );
 }
-

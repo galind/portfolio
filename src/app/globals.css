@@ -6,7 +6,7 @@
   --foreground: #1c1917;
   --accent: #d4af37; /* Gold accent */
   --muted: #78716c;
-  
+
   /* Watchmaking precision colors */
   --steel: #525252;
   --silver: #e5e5e5;
@@ -21,7 +21,7 @@
   --color-steel: var(--steel);
   --color-silver: var(--silver);
   --color-bronze: var(--bronze);
-  
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -49,40 +49,40 @@ body {
 
 /* Subtle background texture */
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 0, 0, 0.01) 2px,
-      rgba(0, 0, 0, 0.01) 4px
-    );
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.01) 2px,
+    rgba(0, 0, 0, 0.01) 4px
+  );
   pointer-events: none;
   z-index: -1;
 }
 
 @media (prefers-color-scheme: dark) {
   body::before {
-    background-image: 
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(255, 255, 255, 0.01) 2px,
-        rgba(255, 255, 255, 0.01) 4px
-      );
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.01) 2px,
+      rgba(255, 255, 255, 0.01) 4px
+    );
   }
 }
 
 /* Smooth transitions for interactive elements */
 * {
-  transition: color 0.2s ease, background-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 /* Accessibility - Skip to content link */
