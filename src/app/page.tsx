@@ -1,9 +1,10 @@
 "use client";
 
-import { GitHub, Linkedin, ArrowUp } from "react-feather";
+import { GitHub, Linkedin, ArrowUp, ExternalLink } from "react-feather";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import experienceData from "@/data/experience.json";
+import workData from "@/data/work.json";
+import projectsData from "@/data/projects.json";
 
 // Dynamic import to avoid SSR issues with Leaflet
 const Map = dynamic(() => import("@/components/Map"), {
@@ -18,13 +19,10 @@ const Map = dynamic(() => import("@/components/Map"), {
   ),
 });
 
-type ExperienceFilter = "all" | "professional" | "hobbies";
-
 export default function Home() {
   const [email, setEmail] = useState("");
   const [copied, setCopied] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [activeFilter, setActiveFilter] = useState<ExperienceFilter>("all");
 
   useEffect(() => {
     // Obfuscate email from scrapers
@@ -52,12 +50,6 @@ export default function Home() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  // Filter experience entries based on active tab
-  const filteredEntries = experienceData.entries.filter((entry) => {
-    if (activeFilter === "all") return true;
-    return entry.type === activeFilter;
-  });
 
   return (
     <>
@@ -93,10 +85,10 @@ export default function Home() {
             {/* Call-to-action */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
               <a
-                href="#experience"
+                href="#work"
                 className="group inline-flex items-center justify-center px-8 py-3 border border-accent text-accent hover:bg-accent hover:text-background transition-all font-light tracking-wider text-sm"
               >
-                View My Experience
+                View My Work
                 <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
               </a>
 
@@ -112,107 +104,168 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experience Section - Timeline */}
+      {/* Work Section - Timeline */}
       <section
-        id="experience"
-        className="flex justify-center px-4 sm:px-6 lg:px-8 py-20 bg-background border-t border-steel/20"
+        id="work"
+        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 bg-background border-t border-steel/20"
       >
         <div className="max-w-5xl w-full">
           <div className="space-y-12">
-            <div className="space-y-6">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight">
-                Experience
-              </h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight">Work</h2>
 
-              {/* Filter Tabs */}
-              <div className="flex gap-4 border-b border-steel/20">
-                {[
-                  { key: "all", label: "All" },
-                  { key: "professional", label: "Professional" },
-                  { key: "hobbies", label: "Hobbies" },
-                ].map((tab) => (
-                  <button
-                    key={tab.key}
-                    onClick={() => setActiveFilter(tab.key as ExperienceFilter)}
-                    className={`pb-3 px-1 text-sm font-light tracking-wider transition-all relative cursor-pointer ${
-                      activeFilter === tab.key
-                        ? "text-foreground"
-                        : "text-muted hover:text-foreground"
-                    }`}
-                  >
-                    {tab.label}
-                    {activeFilter === tab.key && (
-                      <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent"></span>
-                    )}
-                  </button>
-                ))}
-              </div>
-            </div>
+            {/* Work Timeline */}
+            <div className="max-w-4xl mx-auto">
+              <div className="relative">
+                {/* Vertical Timeline Line */}
+                <div className="absolute left-0 md:left-4 top-4 bottom-0 w-px bg-steel/20"></div>
 
-            {/* Timeline */}
-            <div className="relative max-w-4xl">
-              {/* Timeline line */}
-              <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent/40 via-steel/20 to-steel/10 md:-translate-x-1/2"></div>
+                {/* Timeline Entries */}
+                <div className="space-y-14 md:space-y-16">
+                  {workData.entries.map((entry, index) => {
+                    const isFirst = index === 0;
 
-              {/* Timeline Items */}
-              <div className="space-y-16 md:space-y-20">
-                {filteredEntries.map((entry, index) => {
-                  const isEven = index % 2 === 0;
-                  const isFirst = index === 0;
+                    const CardWrapper = entry.link ? "a" : "div";
+                    const cardProps = entry.link
+                      ? {
+                          href: entry.link,
+                          target: "_blank",
+                          rel: "noopener noreferrer",
+                        }
+                      : {};
 
-                  return (
-                    <div key={entry.id} className="relative grid md:grid-cols-2 gap-8 md:gap-16">
-                      {/* Year marker */}
-                      <div
-                        className={`absolute left-0 md:left-1/2 w-4 h-4 rounded-full md:-translate-x-1/2 ${
-                          isFirst ? "bg-accent shadow-lg shadow-accent/20" : "bg-steel/40"
-                        }`}
-                      ></div>
+                    return (
+                      <div key={entry.id} className="relative pl-8 md:pl-16">
+                        {/* Timeline Dot */}
+                        <div
+                          className={`absolute left-0 md:left-4 top-4 w-2 h-2 rounded-full -translate-x-[3.5px] z-10 ${
+                            isFirst
+                              ? "bg-accent ring-4 ring-accent/20"
+                              : "bg-steel/40 ring-4 ring-background"
+                          }`}
+                        ></div>
 
-                      {/* Content - alternates left/right on desktop */}
-                      <div
-                        className={`pl-10 ${
-                          isEven ? "md:text-right md:pl-0 md:pr-16" : "md:pl-16 md:col-start-2"
-                        }`}
-                      >
-                        <div className="space-y-4 group">
-                          <span className="inline-block text-xs uppercase tracking-widest text-accent font-light">
+                        {/* Content */}
+                        <div className="space-y-4">
+                          {/* Date */}
+                          <p
+                            className={`text-xs font-light tracking-wide uppercase ${
+                              isFirst ? "text-accent" : "text-muted"
+                            }`}
+                          >
                             {entry.startDate} — {entry.endDate}
-                          </span>
-
-                          <h3 className="text-2xl md:text-3xl font-light text-foreground">
-                            {entry.name}
-                          </h3>
-
-                          <p className="text-sm text-muted font-light leading-relaxed">
-                            {entry.description}
                           </p>
 
-                          <div className="space-y-2 text-base font-light">
-                            {entry.roles.map((role, roleIndex) => (
-                              <div key={roleIndex}>
-                                <p className="text-foreground">{role.title}</p>
-                                <p className="text-xs text-muted">
-                                  {role.startDate} — {role.endDate}
-                                </p>
-                              </div>
-                            ))}
-                          </div>
+                          {/* Card */}
+                          <CardWrapper
+                            {...cardProps}
+                            className={`group border border-steel/20 p-6 md:p-8 space-y-5 hover:border-accent/50 transition-all ${
+                              entry.link ? "block cursor-pointer" : ""
+                            }`}
+                          >
+                            {/* Header: Company */}
+                            <div>
+                              <h3 className="text-2xl md:text-3xl font-light text-foreground group-hover:text-accent transition-colors">
+                                {entry.name}
+                              </h3>
+                            </div>
 
-                          {entry.technologies.length > 0 && (
-                            <p className="text-[10px] text-muted uppercase tracking-widest font-light">
-                              {entry.technologies.join(" · ")}
+                            {/* Company Description */}
+                            <p className="text-sm text-muted font-light leading-relaxed">
+                              {entry.description}
                             </p>
-                          )}
+
+                            {/* Roles */}
+                            <div className="border-t border-steel/10 pt-4 space-y-4">
+                              {entry.roles.map((role, roleIndex) => (
+                                <div key={roleIndex} className="space-y-2">
+                                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                                    <p className="text-sm text-foreground font-light">
+                                      {role.title}
+                                    </p>
+                                    <p className="text-xs text-muted font-light whitespace-nowrap">
+                                      {role.startDate} — {role.endDate}
+                                    </p>
+                                  </div>
+                                  {"description" in role && role.description && (
+                                    <p className="text-sm text-muted font-light leading-relaxed">
+                                      {role.description}
+                                    </p>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </CardWrapper>
                         </div>
                       </div>
-
-                      {/* Empty space for alternating layout */}
-                      <div className="hidden md:block"></div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section - Card Grid */}
+      <section
+        id="projects"
+        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 bg-background border-t border-steel/20"
+      >
+        <div className="max-w-5xl w-full">
+          <div className="space-y-12">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight">Projects</h2>
+
+            {/* Projects Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {projectsData.entries.map((entry) => {
+                const CardWrapper = entry.link ? "a" : "div";
+                const cardProps = entry.link
+                  ? {
+                      href: entry.link,
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                      className:
+                        "group relative border border-steel/20 hover:border-accent/50 transition-all p-6 md:p-8 space-y-4 block cursor-pointer",
+                    }
+                  : {
+                      className: "group relative border border-steel/20 p-6 md:p-8 space-y-4",
+                    };
+
+                return (
+                  <CardWrapper key={entry.id} {...cardProps}>
+                    {/* External Link Icon - Top Right Corner */}
+                    {entry.link && (
+                      <div className="absolute top-4 right-4 text-muted group-hover:text-accent transition-colors">
+                        <ExternalLink size={18} />
+                      </div>
+                    )}
+
+                    {/* Date */}
+                    <span className="inline-block text-xs uppercase tracking-widest text-accent font-light">
+                      {entry.startDate} — {entry.endDate}
+                    </span>
+
+                    {/* Project Name */}
+                    <h3 className="text-2xl md:text-3xl font-light text-foreground group-hover:text-accent transition-colors pr-8">
+                      {entry.name}
+                    </h3>
+
+                    {/* Description - Larger and more prominent */}
+                    <p className="text-base text-muted font-light leading-relaxed pt-2">
+                      {entry.description}
+                    </p>
+
+                    {/* Technologies */}
+                    {entry.technologies.length > 0 && (
+                      <div className="pt-6 border-t border-steel/10">
+                        <p className="text-[10px] text-muted uppercase tracking-widest font-light">
+                          {entry.technologies.join(" · ")}
+                        </p>
+                      </div>
+                    )}
+                  </CardWrapper>
+                );
+              })}
             </div>
           </div>
         </div>

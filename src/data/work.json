@@ -1,0 +1,84 @@
+{
+  "entries": [
+    {
+      "id": "emburse",
+      "name": "Emburse",
+      "link": "https://emburse.com",
+      "startDate": "Jul 2023",
+      "endDate": "Present",
+      "description": "Emburse simplifies expense management with smart, automated solutions for business travel, invoicing, and corporate cards. It helps organizations control spending and improve financial visibility.",
+      "roles": [
+        {
+          "title": "Software Engineer III",
+          "startDate": "Apr 2025",
+          "endDate": "Present",
+          "description": "Building and maintaining the authentication platform, ensuring secure access and identity management across Emburse's product suite."
+        },
+        {
+          "title": "Senior Automation Engineer",
+          "startDate": "Jul 2023",
+          "endDate": "Apr 2025",
+          "description": "Developed internal automation tools and collaborated with hundreds of Enterprise customers to ensure the platform met their specific business requirements and compliance needs."
+        }
+      ],
+      "technologies": ["Python", "TypeScript", "Bash"]
+    },
+    {
+      "id": "freelance",
+      "name": "Freelance",
+      "link": "",
+      "startDate": "Mar 2022",
+      "endDate": "Apr 2023",
+      "description": "Independent software development services specializing in custom Discord solutions for digital communities and customer engagement.",
+      "roles": [
+        {
+          "title": "Freelance Developer",
+          "startDate": "Mar 2022",
+          "endDate": "Apr 2023",
+          "description": "Wrote custom software, found and managed clients, and delivered tailored solutions for their community and business needs."
+        }
+      ],
+      "technologies": ["Python", "Discord.py", "MongoDB"]
+    },
+    {
+      "id": "bitacora-technology",
+      "name": "Bitacora Technology",
+      "link": "",
+      "startDate": "Jul 2020",
+      "endDate": "Feb 2022",
+      "description": "The first sneaker bot focused on the Mexican market, helping users secure limited-edition releases from local and international retailers.",
+      "roles": [
+        {
+          "title": "Founder",
+          "startDate": "Jul 2020",
+          "endDate": "Feb 2022",
+          "description": "Led all aspects of the business including software development, customer acquisition, and support. Built the product from the ground up and established the customer base."
+        }
+      ],
+      "technologies": []
+    },
+    {
+      "id": "cookbeast",
+      "name": "CookBeast",
+      "link": "https://cop.supply/overviews/cookbeast/",
+      "startDate": "Sept 2019",
+      "endDate": "Apr 2021",
+      "description": "CookBeast empowers sneaker resellers with timely release data, automation tools, and a supportive community. It helps users find profitable drops and stay ahead in the fast-paced resale market.",
+      "roles": [
+        {
+          "title": "Latam Co-Founder",
+          "startDate": "Dec 2019",
+          "endDate": "Apr 2021",
+          "description": "Led the expansion into Latin American markets, establishing operations and growing the user base across Mexico, Colombia, Argentina, and Chile."
+        },
+        {
+          "title": "Software Developer",
+          "startDate": "Sept 2019",
+          "endDate": "Apr 2021",
+          "description": "Built monitoring software to track the most hyped sneaker releases and developed internal Discord tools for community management and engagement."
+        }
+      ],
+      "technologies": []
+    }
+  ]
+}

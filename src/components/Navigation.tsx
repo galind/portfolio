@@ -8,14 +8,15 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState("");
 
   const links = [
-    { href: "#experience", label: "Experience" },
+    { href: "#work", label: "Work" },
+    { href: "#projects", label: "Projects" },
     { href: "#about", label: "Interests" },
     { href: "#contact", label: "Contact" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "experience", "about", "contact"];
+      const sections = ["home", "work", "projects", "about", "contact"];
       const scrollPosition = window.scrollY + 100; // Offset for nav height
 
       for (const sectionId of sections) {

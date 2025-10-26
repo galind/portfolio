@@ -20,28 +20,49 @@ make format    # Format code with Prettier
 make clean     # Clean build artifacts
 ```
 
-## Adding Experience
+## Adding Entries
 
-Edit `src/data/experience.json`:
+### Work
+
+Edit `src/data/work.json`:
 
 ```json
 {
   "id": "unique-id",
   "name": "Company Name",
-  "type": "professional", // or "hobbies"
+  "link": "https://example.com",
   "startDate": "Jan 2024",
   "endDate": "Present",
-  "description": "Brief description",
+  "description": "What the company does",
   "roles": [
     {
       "title": "Your Title",
       "startDate": "Jan 2024",
-      "endDate": "Present"
+      "endDate": "Present",
+      "description": "What you did in this role (optional)"
     }
   ],
   "technologies": ["Tech1", "Tech2"]
 }
 ```
+
+### Projects
+
+Edit `src/data/projects.json`:
+
+```json
+{
+  "id": "unique-id",
+  "name": "Project Name",
+  "link": "https://example.com",
+  "startDate": "Jan 2024",
+  "endDate": "Present",
+  "description": "Detailed description of what the project is and does. Can be longer and more descriptive.",
+  "technologies": ["Tech1", "Tech2"]
+}
+```
+
+**Note:** The `link` field is optional. Leave it as an empty string `""` to hide the link icon.
 
 ## Pre-commit Hooks
 
