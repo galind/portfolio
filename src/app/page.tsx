@@ -224,45 +224,31 @@ export default function Home() {
                       href: entry.link,
                       target: "_blank",
                       rel: "noopener noreferrer",
-                      className:
-                        "group relative border border-steel/20 hover:border-accent/50 transition-all p-6 md:p-8 space-y-4 block cursor-pointer",
                     }
-                  : {
-                      className: "group relative border border-steel/20 p-6 md:p-8 space-y-4",
-                    };
+                  : {};
 
                 return (
-                  <CardWrapper key={entry.id} {...cardProps}>
-                    {/* External Link Icon - Top Right Corner */}
-                    {entry.link && (
-                      <div className="absolute top-4 right-4 text-muted group-hover:text-accent transition-colors">
-                        <ExternalLink size={18} />
-                      </div>
-                    )}
-
+                  <CardWrapper
+                    key={entry.id}
+                    {...cardProps}
+                    className={`group relative border border-steel/20 hover:border-accent/50 transition-all p-6 md:p-8 space-y-5 ${
+                      entry.link ? "block cursor-pointer" : ""
+                    }`}
+                  >
                     {/* Date */}
-                    <span className="inline-block text-xs uppercase tracking-widest text-accent font-light">
+                    <p className="text-xs font-light tracking-wide uppercase text-accent">
                       {entry.startDate} — {entry.endDate}
-                    </span>
+                    </p>
 
                     {/* Project Name */}
-                    <h3 className="text-2xl md:text-3xl font-light text-foreground group-hover:text-accent transition-colors pr-8">
+                    <h3 className="text-2xl md:text-3xl font-light text-foreground group-hover:text-accent transition-colors">
                       {entry.name}
                     </h3>
 
-                    {/* Description - Larger and more prominent */}
-                    <p className="text-base text-muted font-light leading-relaxed pt-2">
+                    {/* Description */}
+                    <p className="text-sm text-muted font-light leading-relaxed">
                       {entry.description}
                     </p>
-
-                    {/* Technologies */}
-                    {entry.technologies.length > 0 && (
-                      <div className="pt-6 border-t border-steel/10">
-                        <p className="text-[10px] text-muted uppercase tracking-widest font-light">
-                          {entry.technologies.join(" · ")}
-                        </p>
-                      </div>
-                    )}
                   </CardWrapper>
                 );
               })}

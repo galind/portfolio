@@ -17,11 +17,6 @@ export const metadata: Metadata = {
   title: "Guillem Galindo | Software Engineer",
   description:
     "Software engineer based in Barcelona. Building software with curiosity and precision. Fascinated by mechanical watches and engineering.",
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafaf9" },
-    { media: "(prefers-color-scheme: dark)", color: "#0c0a09" },
-  ],
   keywords: [
     "Software Engineer",
     "Web Development",
@@ -55,6 +50,15 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafaf9" },
+    { media: "(prefers-color-scheme: dark)", color: "#0c0a09" },
+  ],
 };
 
 export default function RootLayout({
