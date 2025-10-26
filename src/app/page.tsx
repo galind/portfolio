@@ -103,7 +103,7 @@ export default function Home() {
                 className="text-muted hover:text-accent transition-colors relative group text-sm font-light tracking-wide"
               >
                 Contact
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-accent transition-all group-hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-accent transition-all group-hover:w-full"></span>
               </a>
             </div>
           </div>

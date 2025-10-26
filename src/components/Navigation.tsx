@@ -57,9 +57,9 @@ export default function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-light tracking-wider transition-colors ${
+                className={`text-sm font-light tracking-wider transition-colors relative ${
                   activeSection === link.href
-                    ? "text-foreground border-b border-accent pb-1"
+                    ? "text-foreground after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-accent"
                     : "text-muted hover:text-foreground"
                 }`}
               >
@@ -101,9 +101,9 @@ export default function Navigation() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`text-sm font-light tracking-wide transition-colors ${
+                  className={`text-sm font-light tracking-wide transition-colors relative ${
                     activeSection === link.href
-                      ? "text-foreground border-b border-accent pb-1"
+                      ? "text-foreground after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-accent"
                       : "text-muted hover:text-foreground"
                   }`}
                 >
