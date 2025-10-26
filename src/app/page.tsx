@@ -56,21 +56,23 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="home"
-        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-12 bg-background relative overflow-hidden z-10"
+        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-12 relative overflow-hidden"
       >
         <div className="max-w-3xl w-full relative z-10">
           <div className="space-y-12 sm:space-y-16">
             {/* Name and title */}
-            <div className="space-y-6">
-              <h1 className="text-5xl sm:text-6xl md:text-7xl font-light tracking-tight">
+            <div className="space-y-5">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extralight tracking-wide">
                 Guillem Galindo
               </h1>
 
-              <p className="text-xl sm:text-2xl text-muted font-light">Software Engineer</p>
+              <p className="text-lg sm:text-xl text-accent font-light tracking-wide">
+                Software Engineer
+              </p>
             </div>
 
             {/* Introduction */}
-            <div className="space-y-6 text-base sm:text-lg font-light leading-relaxed max-w-2xl">
+            <div className="space-y-8 text-base sm:text-lg font-light leading-relaxed max-w-2xl">
               <p className="text-foreground">
                 I&apos;ve always been curious about how things work. That curiosity led me to
                 software, where I build things from the ground up.
@@ -86,18 +88,22 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
               <a
                 href="#work"
-                className="group inline-flex items-center justify-center px-8 py-3 border border-accent text-accent hover:bg-accent hover:text-background transition-all font-light tracking-wider text-sm"
+                className="group relative inline-flex items-center justify-center px-8 py-3 border border-accent text-accent overflow-hidden font-light tracking-wider text-sm before:absolute before:inset-0 before:bg-accent before:translate-x-[-100%] before:transition-transform before:duration-300 hover:before:translate-x-0"
               >
-                View My Work
-                <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
+                <span className="relative z-10 group-hover:text-background transition-colors">
+                  View My Work
+                </span>
+                <span className="relative z-10 ml-2 transition-all group-hover:translate-x-1 group-hover:text-background">
+                  →
+                </span>
               </a>
 
               <a
                 href="#contact"
-                className="text-muted hover:text-foreground transition-colors relative group text-sm font-light tracking-wide"
+                className="text-muted hover:text-accent transition-colors relative group text-sm font-light tracking-wide"
               >
                 Contact
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-foreground transition-all group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-accent transition-all group-hover:w-full"></span>
               </a>
             </div>
           </div>
@@ -107,9 +113,9 @@ export default function Home() {
       {/* Work Section - Timeline */}
       <section
         id="work"
-        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 bg-background border-t border-steel/20"
+        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 bg-background-alt"
       >
-        <div className="max-w-5xl w-full">
+        <div className="max-w-5xl w-full relative z-10">
           <div className="space-y-12">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight">Work</h2>
 
@@ -140,7 +146,7 @@ export default function Home() {
                           className={`absolute left-0 md:left-4 top-4 w-2 h-2 rounded-full -translate-x-[3.5px] z-10 ${
                             isFirst
                               ? "bg-accent ring-4 ring-accent/20"
-                              : "bg-steel/40 ring-4 ring-background"
+                              : "bg-steel/40 ring-4 ring-background-alt"
                           }`}
                         ></div>
 
@@ -209,9 +215,9 @@ export default function Home() {
       {/* Projects Section - Card Grid */}
       <section
         id="projects"
-        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 bg-background border-t border-steel/20"
+        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20"
       >
-        <div className="max-w-5xl w-full">
+        <div className="max-w-5xl w-full relative z-10">
           <div className="space-y-12">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight">Projects</h2>
 
@@ -231,7 +237,7 @@ export default function Home() {
                   <CardWrapper
                     key={entry.id}
                     {...cardProps}
-                    className={`group relative border border-steel/20 hover:border-accent/50 transition-all p-6 md:p-8 space-y-5 ${
+                    className={`group border border-steel/20 hover:border-accent/50 transition-all p-6 md:p-8 space-y-5 ${
                       entry.link ? "block cursor-pointer" : ""
                     }`}
                   >
@@ -260,9 +266,9 @@ export default function Home() {
       {/* Interests Section */}
       <section
         id="about"
-        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 bg-background border-t border-steel/20"
+        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 bg-background-alt"
       >
-        <div className="max-w-5xl w-full">
+        <div className="max-w-5xl w-full relative z-10">
           <div className="space-y-12">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight">
               Interests
@@ -326,9 +332,9 @@ export default function Home() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 bg-background border-t border-steel/20"
+        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20"
       >
-        <div className="max-w-3xl w-full">
+        <div className="max-w-3xl w-full relative z-10">
           <div className="space-y-12">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight">Contact</h2>
 
@@ -362,7 +368,7 @@ export default function Home() {
                       href="https://github.com/galind"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted hover:text-foreground transition-colors flex items-center gap-2"
+                      className="text-muted hover:text-accent transition-colors flex items-center gap-2"
                     >
                       <GitHub size={16} />
                       <span>GitHub</span>
@@ -371,7 +377,7 @@ export default function Home() {
                       href="https://linkedin.com/in/ggalindoa"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted hover:text-foreground transition-colors flex items-center gap-2"
+                      className="text-muted hover:text-accent transition-colors flex items-center gap-2"
                     >
                       <Linkedin size={16} />
                       <span>LinkedIn</span>
@@ -390,7 +396,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-steel/20 bg-background">
+      <footer className="relative z-10 border-t border-steel/20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
           <p className="text-sm text-muted font-light text-center">
             © {new Date().getFullYear()} Guillem Galindo
@@ -402,7 +408,7 @@ export default function Home() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 border border-accent text-accent bg-background hover:bg-accent hover:text-background rounded-full transition-all z-40 cursor-pointer"
+          className="fixed bottom-8 right-8 p-3 border border-accent text-accent bg-background hover:bg-accent hover:text-background rounded-full transition-all z-50 cursor-pointer"
           aria-label="Scroll to top"
         >
           <ArrowUp size={20} />
