@@ -6,8 +6,7 @@
       "link": "https://nomosarchives.com",
       "startDate": "Apr 2025",
       "endDate": "Present",
-      "description": "A platform for archiving and exploring historical content. Built to preserve and make accessible important historical documents and media through a modern, searchable interface.",
-      "technologies": ["TypeScript", "Node", "Python"]
+      "description": "A platform for archiving and exploring historical content. Built to preserve and make accessible important historical documents and media through a modern, searchable interface."
     },
     {
       "id": "watchmaking-tools",
@@ -15,8 +14,15 @@
       "link": "",
       "startDate": "Jul 2025",
       "endDate": "Present",
-      "description": "Helping young watchmakers get started without expensive equipment. Sharing 3D-printable tools, fixtures, and cheap workarounds for problems that would otherwise require costly specialized machines.",
-      "technologies": ["Fusion 360", "3D Printing"]
+      "description": "Helping young watchmakers get started without expensive equipment. Sharing 3D-printable tools, fixtures, and cheap workarounds for problems that would otherwise require costly specialized machines."
+    },
+    {
+      "id": "fix-the-watch",
+      "name": "Fix The Watch",
+      "link": "https://fixthewatch.com",
+      "startDate": "Nov 2025",
+      "endDate": "Present",
+      "description": "A service order management platform for watchmakers. Streamlines customer repair workflows and service order tracking, helping watchmakers focus on their craft rather than administrative tasks."
     }
   ]
 }
